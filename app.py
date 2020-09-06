@@ -1,10 +1,12 @@
 from woordteller import get_words
 from flask import Flask, request, render_template
 from redis import Redis
+import os
 
 
 app = Flask(__name__)
-redis = Redis(host='redis', decode_responses=True)
+redis_host = os.environ.get('REDIS_HOST', 'redis')
+redis = Redis(host=redis_host, decode_responses=True)
 
 user = 'foouser'
 

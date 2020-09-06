@@ -1,4 +1,4 @@
-from woordteller import get_words
+from woordenteller import get_words
 from flask import (
     Flask, request, render_template, redirect, session, url_for
 )

@@ -16,10 +16,10 @@ RUN pip install cython gunicorn
 # everything else, so that dependency installation is only triggered
 # when the requirements.txt is changed and not when any of the other
 # input files change.
-COPY requirements.txt /opt/woordteller/
-WORKDIR /opt/woordteller
+COPY requirements.txt /opt/woordenteller/
+WORKDIR /opt/woordenteller
 RUN pip install -r requirements.txt
 
-COPY . /opt/woordteller
+COPY . /opt/woordenteller
 
 CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8000"]

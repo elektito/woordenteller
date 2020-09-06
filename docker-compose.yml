@@ -4,5 +4,7 @@ services:
     build: .
     ports:
       - 8000:8000
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
   redis:
     image: "redis"

@@ -91,7 +91,6 @@ def get_google_provider_cfg():
 
 
 @app.route('/')
-@login_required
 def index():
     words_key = f'words:{current_user.get_id()}'
     if 'params' in session:

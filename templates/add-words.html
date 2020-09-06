@@ -1,0 +1,20 @@
+<div class="user_info">
+  Current user: {{ current_user.name }}
+  <a href="{{ url_for('logout') }}">Logout</a>
+</div>
+
+<form method="post" action="/add">
+  Enter Dutch Text:
+  <input type="text" name="input-text" autofocus>
+  <input type="submit" value="go">
+</form>
+{% if new_words or existing_words or thrown_words %}
+<div>
+  {{ word_list('New words', 'new_word', new_words) }}
+  {{ word_list('Existing words', 'existing_word', existing_words) }}
+  {{ word_list('Thrown-away words', 'thrown_word', thrown_words) }}
+</div>
+{% endif %}
+<div>
+  You know {{ nwords }} word{{ "s" if nwords != 1 else "" }}.
+</div>

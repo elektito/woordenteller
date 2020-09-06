@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% macro word_list(title, words) %}
+<div>
+  {{ title }}:
+  {% for word in words|sort %}
+  <span>{{ word }}</span>{{ "," if not loop.last }}
+  {% endfor %}
+</div>
+{% endmacro %}
+
 {% block body %}
 <form method="post" action="/add">
   Enter Dutch Text:
@@ -8,9 +17,9 @@
 </form>
 {% if new_words or existing_words or thrown_words %}
 <div>
-  <div>new: {{ new_words }}</div>
-  <div>existing: {{ existing_words }}</div>
-  <div>thrown: {{ thrown_words }}</div>
+  {{ word_list('New words', new_words) }}
+  {{ word_list('Existing words', existing_words) }}
+  {{ word_list('Thrown-away words', thrown_words) }}
 </div>
 {% endif %}
 <div>

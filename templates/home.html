@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body %}
+<form method="post">
+  Enter Dutch Text:
+  <input type="text" name="input-text" autofocus>
+  <input type="submit" value="go">
+</form>
+{% if new_words or existing_words or thrown_words %}
+<div>
+  <div>new: {{ new_words }}</div>
+  <div>existing: {{ existing_words }}</div>
+  <div>thrown: {{ thrown_words }}</div>
+</div>
+{% endif %}
+<div>
+  You know {{ nwords }} word{{ "s" if nwords != 1 else "" }}.
+</div>
+{% endblock %}

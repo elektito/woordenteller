@@ -1,0 +1,24 @@
+.word_list {
+    padding: 0.5em;
+}
+
+.new_word {
+    padding: 0.2em;
+    margin: 0.1em;
+    background-color: green;
+    border-radius: 0.4em;
+}
+
+.existing_word {
+    padding: 0.2em;
+    margin: 0.1em;
+    background-color: red;
+    border-radius: 0.4em;
+}
+
+.thrown_word {
+    padding: 0.2em;
+    margin: 0.1em;
+    background-color: grey;
+    border-radius: 0.4em;
+}

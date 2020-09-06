@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
-{% macro word_list(title, words) %}
-<div>
+{% macro word_list(title, class, words) %}
+<div class="word_list">
   {{ title }}:
   {% for word in words|sort %}
-  <span>{{ word }}</span>{{ "," if not loop.last }}
+  <span class={{ class }}>{{ word }}</span>
   {% endfor %}
 </div>
 {% endmacro %}
 
 {% block body %}
+<h1>Nederlands Woordteller</h1>
 <form method="post" action="/add">
   Enter Dutch Text:
   <input type="text" name="input-text" autofocus>
@@ -17,9 +18,9 @@
 </form>
 {% if new_words or existing_words or thrown_words %}
 <div>
-  {{ word_list('New words', new_words) }}
-  {{ word_list('Existing words', existing_words) }}
-  {{ word_list('Thrown-away words', thrown_words) }}
+  {{ word_list('New words', 'new_word', new_words) }}
+  {{ word_list('Existing words', 'existing_word', existing_words) }}
+  {{ word_list('Thrown-away words', 'thrown_word', thrown_words) }}
 </div>
 {% endif %}
 <div>

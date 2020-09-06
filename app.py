@@ -4,7 +4,7 @@ from redis import Redis
 
 
 app = Flask(__name__)
-redis = Redis(decode_responses=True)
+redis = Redis(host='redis', decode_responses=True)
 
 user = 'foouser'
 

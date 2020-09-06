@@ -11,6 +11,12 @@
 
 {% block body %}
 <h1>Nederlands Woordteller</h1>
+
+<div class="user_info">
+  Current user: {{ current_user.name }}
+  <a href="/logout">Logout</a>
+</div>
+
 <form method="post" action="/add">
   Enter Dutch Text:
   <input type="text" name="input-text" autofocus>

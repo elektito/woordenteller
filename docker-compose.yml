@@ -6,5 +6,7 @@ services:
       - 8000:8000
     environment:
       - SECRET_KEY=${SECRET_KEY}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
   redis:
     image: "redis"

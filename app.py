@@ -33,6 +33,8 @@ if os.environ.get('SECRET_KEY'):
 else:
     raise RuntimeError('Environment variable SECRET_KEY not set.')
 
+app.config['SERVER_NAME'] = os.environ.get('SERVER_NAME')
+
 redis_host = os.environ.get('REDIS_HOST', 'redis')
 redis = Redis(host=redis_host, decode_responses=True)
 

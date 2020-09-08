@@ -5,6 +5,7 @@ from flask import (
 from flask_login import (
     LoginManager, login_required, login_user, logout_user, current_user
 )
+from werkzeug.middleware.proxy_fix import ProxyFix
 from redis import Redis
 from oauthlib.oauth2 import WebApplicationClient
 import requests
@@ -23,6 +24,9 @@ if not GOOGLE_CLIENT_SECRET:
     raise RuntimeError('GOOGLE_CLIENT_SECRET environment variable not set.')
 
 app = Flask(__name__)
+
+# Add middleware for running behind a reverse proxy with https
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 
 if os.environ.get('SECRET_KEY'):
     app.config.update(SECRET_KEY=os.environ['SECRET_KEY'])

@@ -22,6 +22,20 @@ if not GOOGLE_CLIENT_ID:
 if not GOOGLE_CLIENT_SECRET:
     raise RuntimeError('GOOGLE_CLIENT_SECRET environment variable not set.')
 
+app = Flask(__name__)
+
+if os.environ.get('SECRET_KEY'):
+    app.config.update(SECRET_KEY=os.environ['SECRET_KEY'])
+else:
+    raise RuntimeError('Environment variable SECRET_KEY not set.')
+
+redis_host = os.environ.get('REDIS_HOST', 'redis')
+redis = Redis(host=redis_host, decode_responses=True)
+
+client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 class User:
@@ -63,22 +77,6 @@ class User:
             'picture': picture,
         }
         redis.set(f'user:{id}', json.dumps(user_data))
-
-
-app = Flask(__name__)
-
-if os.environ.get('SECRET_KEY'):
-    app.config.update(SECRET_KEY=os.environ['SECRET_KEY'])
-else:
-    raise RuntimeError('Environment variable SECRET_KEY not set.')
-
-redis_host = os.environ.get('REDIS_HOST', 'redis')
-redis = Redis(host=redis_host, decode_responses=True)
-
-client = WebApplicationClient(GOOGLE_CLIENT_ID)
-
-login_manager = LoginManager()
-login_manager.init_app(app)
 
 
 @login_manager.user_loader

@@ -87,6 +87,8 @@ class User:
 
 @login_manager.user_loader
 def load_user(user_id):
+    if os.environ.get('DEBUG_USER'):
+        return User('DEBUG_UESR', 'DEBUG UESR', 'debuguser@example.com', '')
     return User.get(user_id)
 
 
@@ -109,6 +111,11 @@ def index():
 
 @app.route('/login')
 def login():
+    app.logger.warning(str(os.environ.get('DEBUG_USER')))
+    if os.environ.get('DEBUG_USER'):
+        login_user('DEBUG_UESR')
+        return redirect(url_for('index'))
+
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg['authorization_endpoint']
 

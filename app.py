@@ -224,4 +224,13 @@ def add_words():
 
 
 if __name__ == '__main__':
-    app.run(port=8000, ssl_context='adhoc')
+    # By declaring a non-empty environment variable named ADHOC_SSL
+    # the user can ask for adhoc ssl to be enabled, so they can access
+    # localhost over SSL. Could be useful for testing OAuth login
+    # locally.
+    if os.environ.get('ADHOC_SSL'):
+        ssl_context = 'adhoc'
+    else:
+        # disable adhoc ssl
+        ssl_context = None
+    app.run(port=8000, ssl_context=ssl_context)

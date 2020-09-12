@@ -9,9 +9,11 @@
   {{ msg }}
 </div>
 
-<ul class="wordlist">
-  {% for word in words|sort %}
-  <li>{{ macros.word_box(word, 'new-word') }}</li>
-  {% endfor %}
-</ul>
+<div>
+  <ul class="wordlist">
+    {% for word in words|sort %}
+    <li>{{ macros.word_box(word, 'new-word') }}</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

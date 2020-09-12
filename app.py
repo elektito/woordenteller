@@ -1,6 +1,6 @@
 from woordenteller import get_words
 from flask import (
-    Flask, request, render_template, redirect, session, url_for
+    Flask, request, render_template, redirect, session, url_for, jsonify
 )
 from flask_login import (
     LoginManager, login_required, login_user, logout_user, current_user
@@ -221,6 +221,18 @@ def add_words():
 
     session['params'] = params
     return redirect('/', code=303)
+
+
+@app.route('/remove', methods=['POST'])
+@login_required
+def remove_word():
+    word = request.args.get('word');
+    words_key = f'words:{current_user.get_id()}'
+    redis.srem(words_key, word)
+    return jsonify({
+        'description': f'"{word} removed from database.',
+        'nwords': redis.scard(words_key),
+    })
 
 
 if __name__ == '__main__':

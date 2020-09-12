@@ -4,7 +4,15 @@
 <div class="word_list">
   {{ title }}:
   {% for word in words|sort %}
-  <span class={{ class }}>{{ word }}</span>
+  <span class={{ class }}>
+    {{ word }}
+    <button class="x-btn"
+            onclick="remove_word('{{ word | urlencode}}', this.parentNode)"
+            aria-label="Remove word from database.">
+      {# wrap in span with aria-hidden=true so screen readers won't read it. #}
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </span>
   {% endfor %}
 </div>
 {% endmacro %}

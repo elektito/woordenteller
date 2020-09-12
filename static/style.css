@@ -1,3 +1,31 @@
+.invisible-msg {
+    display: none;
+}
+
+.success-msg {
+    padding: 0.2em;
+    margin: 0.5em;
+    background-color: greenyellow;
+    color: black;
+    display: inline-block;
+}
+
+.error-msg {
+    padding: 0.2em;
+    margin: 0.5em;
+    background-color: firebrick;
+    color: white;
+    display: inline-block;
+}
+
+.x-btn {
+    margin: 0.2em;
+    text-decoration: none;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+}
+
 .word_list {
     padding: 0.5em;
 }

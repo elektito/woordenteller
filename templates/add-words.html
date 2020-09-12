@@ -8,6 +8,11 @@
   <input type="text" name="input-text" autofocus>
   <input type="submit" value="go">
 </form>
+
+<div id="msgbox" class="invisible-msg">
+  {{ msg }}
+</div>
+
 {% if new_words or existing_words or thrown_words %}
 <div>
   {{ word_list('New words', 'new_word', new_words) }}
@@ -16,5 +21,5 @@
 </div>
 {% endif %}
 <div>
-  You know {{ nwords }} word{{ "s" if nwords != 1 else "" }}.
+  You know <span id="wordcount">{{ nwords }}</span> word{{ "s" if nwords != 1 else "" }}.
 </div>

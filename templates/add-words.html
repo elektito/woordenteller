@@ -1,6 +1,6 @@
 {% import "macros.jinja2" as macros %}
 
-<div class="user_info">
+<div class="user-info">
   Current user: {{ current_user.name }}
   <a href="{{ url_for('logout') }}">Logout</a>
 </div>
@@ -17,9 +17,9 @@
 
 {% if new_words or existing_words or thrown_words %}
 <div>
-  {{ macros.word_list('New words', 'new_word', new_words) }}
-  {{ macros.word_list('Existing words', 'existing_word', existing_words) }}
-  {{ macros.word_list('Thrown-away words', 'thrown_word', thrown_words) }}
+  {{ macros.word_list('New words', 'new-word', new_words) }}
+  {{ macros.word_list('Existing words', 'existing-word', existing_words) }}
+  {{ macros.word_list('Thrown-away words', 'thrown-word', thrown_words) }}
 </div>
 {% endif %}
 <div>

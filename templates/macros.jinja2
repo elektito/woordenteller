@@ -2,7 +2,7 @@
 <span class={{ class }}>
   {{ word }}
 
-  {% if class != "thrown_word" %}
+  {% if class != "thrown-word" %}
   <button class="x-btn"
           onclick="remove_word('{{ word | urlencode}}', this.parentNode)"
           aria-label="Remove word from database.">

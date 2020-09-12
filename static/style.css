@@ -44,7 +44,7 @@
     margin: 0.2em;
 }
 
-.new_word {
+.new-word {
     padding: 0.2em;
     padding-left: 0.4em;
     padding-right: 0.4em;
@@ -53,7 +53,7 @@
     display: inline-block;
 }
 
-.existing_word {
+.existing-word {
     padding: 0.2em;
     padding-left: 0.4em;
     padding-right: 0.4em;
@@ -62,7 +62,7 @@
     display: inline-block;
 }
 
-.thrown_word {
+.thrown-word {
     padding: 0.2em;
     padding-left: 0.4em;
     padding-right: 0.4em;
@@ -71,6 +71,6 @@
     display: inline-block;
 }
 
-.user_info {
+.user-info {
     padding: 0.4em;
 }

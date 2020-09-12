@@ -1,0 +1,25 @@
+{% macro word_box(word, class) %}
+<span class={{ class }}>
+  {{ word }}
+
+  {% if class != "thrown_word" %}
+  <button class="x-btn"
+          onclick="remove_word('{{ word | urlencode}}', this.parentNode)"
+          aria-label="Remove word from database.">
+    {# wrap in span with aria-hidden=true so screen readers won't read it. #}
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {% endif %}
+</span>
+{% endmacro %}
+
+{% macro word_list(title, class, words) %}
+<div class="wordlist-box">
+  {{ title }}:
+  <ul class="wordlist">
+  {% for word in words|sort %}
+  <li>{{ word_box(word, class) }}</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endmacro %}

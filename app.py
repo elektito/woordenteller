@@ -113,6 +113,16 @@ def index():
     return render_template('home.html', **params)
 
 
+@app.route('/list')
+@login_required
+def list_words():
+    words_key = f'words:{current_user.get_id()}'
+    params = {
+        'words': redis.smembers(words_key),
+    }
+    return render_template('list.html', **params)
+
+
 @app.route('/login')
 def login():
     if os.environ.get('DEBUG_USER'):

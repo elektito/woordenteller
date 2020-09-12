@@ -19,36 +19,56 @@
 }
 
 .x-btn {
-    margin: 0.2em;
+    margin: 0em;
+    padding: 0em;
     text-decoration: none;
     color: inherit;
     background-color: transparent;
     border: none;
 }
 
-.word_list {
-    padding: 0.5em;
+.wordlist {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    list-style-type: none;
+}
+
+.wordlist li {
+    padding: 0.1em;
+    margin: 0.1em;
+    display: inline-block;
+}
+
+.wordlist-box {
+    margin: 0.2em;
 }
 
 .new_word {
     padding: 0.2em;
-    margin: 0.1em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     background-color: green;
     border-radius: 0.4em;
+    display: inline-block;
 }
 
 .existing_word {
     padding: 0.2em;
-    margin: 0.1em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     background-color: red;
     border-radius: 0.4em;
+    display: inline-block;
 }
 
 .thrown_word {
     padding: 0.2em;
-    margin: 0.1em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
     background-color: grey;
     border-radius: 0.4em;
+    display: inline-block;
 }
 
 .user_info {

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% import "macros.jinja2" as macros %}
+
+{% block body %}
+<h1>The Words You Know</h1>
+
+<ul class="wordlist">
+  {% for word in words|sort %}
+  <li>{{ macros.word_box(word, 'new_word') }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

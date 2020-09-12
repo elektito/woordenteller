@@ -4,7 +4,7 @@
 
   {% if class != "thrown-word" %}
   <button class="x-btn"
-          onclick="remove_word('{{ word | urlencode}}', this.parentNode)"
+          onclick="remove_word('{{ word | urlencode}}', this.parentNode.parentNode)"
           aria-label="Remove word from database.">
     {# wrap in span with aria-hidden=true so screen readers won't read it. #}
     <span aria-hidden="true">&times;</span>

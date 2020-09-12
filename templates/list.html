@@ -5,6 +5,10 @@
 {% block body %}
 <h1>The Words You Know</h1>
 
+<div id="msgbox" class="invisible-msg">
+  {{ msg }}
+</div>
+
 <ul class="wordlist">
   {% for word in words|sort %}
   <li>{{ macros.word_box(word, 'new-word') }}</li>

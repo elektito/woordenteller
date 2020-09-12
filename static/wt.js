@@ -14,7 +14,9 @@ function remove_word(word, elem) {
 
         response = e.target.response;
         word_count_label = document.querySelector('#wordcount')
-        word_count_label.textContent = response['nwords'];
+        if (word_count_label) {
+            word_count_label.textContent = response['nwords'];
+        }
 
         // remove the word box from the page
         console.log(elem.parentNode);

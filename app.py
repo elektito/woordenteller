@@ -86,7 +86,8 @@ class User:
 
 
 def get_debug_user():
-    return User('DEBUG_USER', 'DEBUG USER', 'debuguser@example.com', '')
+    return User('DEBUG_USER', 'DEBUG USER', 'debuguser@example.com',
+                url_for('static', filename='dbg-user.png'))
 
 
 @login_manager.user_loader

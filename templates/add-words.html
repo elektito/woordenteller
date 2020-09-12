@@ -2,6 +2,9 @@
 
 <div class="user-info">
   Current user: {{ current_user.name }}
+  {% if current_user.picture %}
+  <img src="{{ current_user.picture }}" class="profile-pic">
+  {% endif %}
   <a href="{{ url_for('logout') }}">Logout</a>
 </div>
 

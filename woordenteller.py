@@ -23,15 +23,24 @@ def get_words(s, debug=False):
                 # the "kept" list.
                 words = word['lemma'].split('_')
                 types = word['ner'].split('_')
-                for word, type in zip(words, types):
-                    if type == 'O':
-                        kept.add(word)
-                    else:
-                        thrown.add(word + (f' ({type})' if debug else ''))
+                if 'O' in types:
+                    for w, t in zip(words, types):
+                        if t == 'O':
+                            kept.add(w)
+                        else:
+                            thrown.add(_format_thrown_word(w, t, debug))
+                else:
+                    thrown.add(_format_thrown_word(
+                        word['lemma'], word['ner'], debug))
             else:
-                to_add = word['lemma']
-                if debug:
-                    to_add += f' ({word["ner"]})'
-                thrown.add(to_add)
+                thrown.add(_format_thrown_word(
+                    word['lemma'], word['ner'], debug))
 
     return kept, thrown
+
+
+def _format_thrown_word(word, ner, debug):
+    result = word
+    if debug:
+        result += f' ({ner})'
+    return result

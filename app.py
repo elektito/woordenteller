@@ -118,8 +118,10 @@ def index():
 @login_required
 def list_words():
     words_key = f'words:{current_user.get_id()}'
+    words = redis.smembers(words_key)
     params = {
-        'words': redis.smembers(words_key),
+        'words': words,
+        'nwords': len(words),
     }
     return render_template('list.html', **params)
 

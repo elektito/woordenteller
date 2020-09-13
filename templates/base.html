@@ -38,5 +38,16 @@
     {% endif %}
 
     {% block body %}{% endblock %}
+
+    {% if current_user.is_authenticated %}
+    <nav class="navbar navbar-dark bg-dark fixed-bottom">
+      <div class="navbar-text">
+        You know
+        <a href="/list">
+          <span id="wordcount">{{ nwords }}</span> word{{ "s" if nwords != 1 else "" }}
+        </a>.
+      </div>
+    </nav>
+    {% endif %}
   </body>
 </html>

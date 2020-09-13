@@ -17,6 +17,16 @@
       <span class="navbar-brand">NL Woordenteller</span>
     </nav>
 
+    {% if current_user.is_authenticated %}
+    <div class="user-info bg-secondary">
+      Current user: {{ current_user.name }}
+      {% if current_user.picture %}
+      <img src="{{ current_user.picture }}" class="profile-pic">
+      {% endif %}
+      <a href="{{ url_for('logout') }}" class="text-info">Logout</a>
+    </div>
+    {% endif %}
+
     {% block body %}{% endblock %}
   </body>
 </html>

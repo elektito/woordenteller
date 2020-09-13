@@ -1,4 +1,9 @@
-<div class="p-2">
-  You need to be logged in, in order to use this app.
-  <a href="{{ url_for('login') }}" class="btn btn-primary" role="button">login</a>
+<div class="container d-flex justify-content-center p-4">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Login Required</h5>
+      <p class="card-text">You need to be logged in, in order to use this app.</p>
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg" role="button">login</a>
+    </div>
+  </div>
 </div>

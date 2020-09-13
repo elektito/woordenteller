@@ -19,7 +19,6 @@ function remove_word(word, elem) {
         }
 
         // remove the word box from the page
-        console.log(elem.parentNode);
         elem.parentNode.removeChild(elem);
     };
     xhr.responseType = 'json';

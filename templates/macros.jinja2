@@ -14,12 +14,14 @@
 {% endmacro %}
 
 {% macro word_list(title, class, words) %}
-<div class="wordlist-box">
-  {{ title }}:
-  <ul class="wordlist">
-  {% for word in words|sort %}
-  <li>{{ word_box(word, class) }}</li>
-  {% endfor %}
-  </ul>
+<div class="card m-1 p-0">
+  <div class="card-header p-1 bg-dark text-light">{{ title }}</div>
+  <div class="card-body p-1">
+    <ul class="wordlist">
+    {% for word in words|sort %}
+      <li>{{ word_box(word, class) }}</li>
+    {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endmacro %}

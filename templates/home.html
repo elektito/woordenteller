@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
 {% block body %}
-<nav class="navbar navbar-dark bg-dark">
-  <span class="navbar-brand">NL Woordenteller</span>
-</nav>
 
 {% if current_user.is_authenticated %}
 {%   include "add-words.html" %}

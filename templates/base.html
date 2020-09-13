@@ -39,7 +39,11 @@
     </div>
     {% endif %}
 
-    {% block body %}{% endblock %}
+    {# add some space to the bottom of the contents so that they don't
+       go under the bottom footer #}
+    <div class="pb-4 mb-5">
+      {% block body %}{% endblock %}
+    </div>
 
     {% if current_user.is_authenticated %}
     <nav class="navbar navbar-dark bg-dark fixed-bottom">

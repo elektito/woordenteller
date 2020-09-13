@@ -215,7 +215,9 @@ def logout():
 @login_required
 def add_words():
     input_text = request.form['input-text']
-    kept, thrown = get_words(input_text)
+    kept, thrown = get_words(
+        input_text,
+        debug=bool(os.environ.get('DEBUG_USER')))
 
     words_key = f'words:{current_user.get_id()}'
     current = redis.smembers(words_key)

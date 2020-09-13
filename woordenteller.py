@@ -4,7 +4,7 @@ from frog import Frog, FrogOptions
 frog = Frog(FrogOptions(chunking=False,
                         parser=False))
 
-def get_words(s):
+def get_words(s, debug=False):
     result = frog.process(s)
 
     kept, thrown = set(), set()
@@ -14,6 +14,9 @@ def get_words(s):
         elif word['ner'] == 'O':
             kept.add(word['lemma'])
         else:
-            thrown.add(word['lemma'])
+            to_add = word['lemma']
+            if debug:
+                to_add += f' ({word["ner"]})'
+            thrown.add(to_add)
 
     return kept, thrown

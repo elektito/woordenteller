@@ -20,9 +20,11 @@
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
+        {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a href="/list" class="nav-link">List</a>
         </li>
+        {% endif %}
       </ul>
 
     </nav>

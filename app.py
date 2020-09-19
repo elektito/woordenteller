@@ -45,11 +45,12 @@ login_manager.init_app(app)
 
 
 class User:
-    def __init__(self, id, name, email, picture):
+    def __init__(self, id, name, email, picture, *, debug=False):
         self.id = id
         self.name = name
         self.email = email
         self.picture = picture
+        self.debug = debug
 
         self.is_authenticated = True
         self.is_active = True
@@ -87,7 +88,8 @@ class User:
 
 def get_debug_user():
     return User('DEBUG_USER', 'DEBUG USER', 'debuguser@example.com',
-                url_for('static', filename='dbg-user.png'))
+                url_for('static', filename='dbg-user.png'),
+                debug=True)
 
 
 @login_manager.user_loader
@@ -217,7 +219,7 @@ def add_words():
     input_text = request.form['input-text']
     kept, thrown = get_words(
         input_text,
-        debug=bool(os.environ.get('DEBUG_USER')))
+        debug=current_user.debug)
 
     words_key = f'words:{current_user.get_id()}'
     current = redis.smembers(words_key)

@@ -88,7 +88,7 @@ class User:
                         user_data['name'],
                         user_data['email'],
                         user_data['picture'],
-                        share_code=user_data['share_code'])
+                        share_code=user_data.get('share_code'))
             return user
 
 

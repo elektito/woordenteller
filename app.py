@@ -122,7 +122,7 @@ def generate_share_code(user_id):
         added = redis.sadd('share:codes', code)
         if added == 1:
             break
-    redis.set(f'user:share:{code}', user_id)
+    redis.set(f'share:user:{code}', user_id)
     return code
 
 
@@ -164,7 +164,7 @@ def list_words():
 
 @app.route('/list/<share_code>')
 def list_shared_words(share_code):
-    user_id = redis.get(f'user:share:{share_code}')
+    user_id = redis.get(f'share:user:{share_code}')
     user = User.get(user_id)
     words_key = f'words:{user_id}'
     words = redis.smembers(words_key)
@@ -281,7 +281,7 @@ def share_create():
 @login_required
 def share_remove():
     redis.srem('share:codes', current_user.share_code)
-    redis.delete(f'user:share:{current_user.share_code}')
+    redis.delete(f'share:user:{current_user.share_code}')
     current_user.share_code = None
     current_user.save()
     return redirect('/share', code=303)

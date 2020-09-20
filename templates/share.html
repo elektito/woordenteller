@@ -10,6 +10,7 @@
       <a href="{{ url_for('list_shared_words', share_code=current_user.share_code) }}">
         {{ url_for('list_shared_words', share_code=current_user.share_code, _external=True) }}
       </a>
+      <a href="/share/remove" class="btn btn-primary rounded m-1">Remove share link</a>
       {% else %}
       You can create a share link to show off the words you know:
       <a href="/share/create" class="btn btn-primary rounded m-1">Create share link</a>

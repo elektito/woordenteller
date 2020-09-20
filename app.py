@@ -277,6 +277,16 @@ def share_create():
     return redirect('/share', code=303)
 
 
+@app.route('/share/remove')
+@login_required
+def share_remove():
+    redis.srem('share:codes', current_user.share_code)
+    redis.delete(f'user:share:{current_user.share_code}')
+    current_user.share_code = None
+    current_user.save()
+    return redirect('/share', code=303)
+
+
 @app.route('/add', methods=['POST'])
 @login_required
 def add_words():

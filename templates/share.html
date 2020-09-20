@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="d-flex justify-content-center">
+  <div class="card rounded" style="width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Share Your Words</h5>
+      {% if current_user.share_code %}
+      Here's your share link:
+      <a href="{{ url_for('list_shared_words', share_code=current_user.share_code) }}">
+        {{ url_for('list_shared_words', share_code=current_user.share_code, _external=True) }}
+      </a>
+      {% else %}
+      You can create a share link to show off the words you know:
+      <a href="/share/create" class="btn btn-primary rounded m-1">Create share link</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,8 +1,8 @@
-{% macro word_box(word, class) %}
+{% macro word_box(word, class, readonly) %}
 <span class={{ class }}>
   {{ word }}
 
-  {% if class != "thrown-word" %}
+  {% if class != "thrown-word" and not readonly %}
   <button class="x-btn"
           onclick="remove_word('{{ word | urlencode}}', this.parentNode.parentNode)"
           aria-label="Remove word from database.">
@@ -19,7 +19,7 @@
   <div class="card-body p-1">
     <ul class="wordlist">
     {% for word in words|sort %}
-      <li>{{ word_box(word, class) }}</li>
+      <li>{{ word_box(word, class, False) }}</li>
     {% endfor %}
     </ul>
   </div>

@@ -4,7 +4,11 @@
 
 {% block body %}
 <div class="d-flex justify-content-center">
+  {% if user_name %}
+  <div class="display-4">Shared Words for: {{ user_name }}</div>
+  {% else %}
   <div class="display-4">The Words You Know</div>
+  {% endif %}
 </div>
 
 <div class="d-flex justify-content-center">
@@ -16,7 +20,7 @@
 <div>
   <ul class="wordlist">
     {% for word in words|sort %}
-    <li>{{ macros.word_box(word, 'new-word') }}</li>
+    <li>{{ macros.word_box(word, 'new-word', readonly) }}</li>
     {% endfor %}
   </ul>
 </div>

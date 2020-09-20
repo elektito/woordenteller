@@ -11,6 +11,8 @@ from oauthlib.oauth2 import WebApplicationClient
 import requests
 import json
 import os
+import random
+import string
 
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
@@ -45,12 +47,14 @@ login_manager.init_app(app)
 
 
 class User:
-    def __init__(self, id, name, email, picture, *, debug=False):
+    def __init__(self, id, name, email, picture, *,
+                 debug=False, share_code=None):
         self.id = id
         self.name = name
         self.email = email
         self.picture = picture
         self.debug = debug
+        self.share_code = share_code
 
         self.is_authenticated = True
         self.is_active = True
@@ -59,6 +63,18 @@ class User:
 
     def get_id(self):
         return self.id
+
+
+    def save(self):
+        data = {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'picture': self.picture,
+        }
+        if self.share_code:
+            data['share_code'] = self.share_code
+        redis.set(f'user:{self.id}', json.dumps(data))
 
 
     @staticmethod
@@ -71,7 +87,8 @@ class User:
             user = User(user_data['id'],
                         user_data['name'],
                         user_data['email'],
-                        user_data['picture'])
+                        user_data['picture'],
+                        share_code=user_data['share_code'])
             return user
 
 
@@ -87,9 +104,26 @@ class User:
 
 
 def get_debug_user():
-    return User('DEBUG_USER', 'DEBUG USER', 'debuguser@example.com',
-                url_for('static', filename='dbg-user.png'),
-                debug=True)
+    user = User.get('DEBUG_USER')
+    if user:
+        return user
+    else:
+        return User('DEBUG_USER', 'DEBUG USER', 'debuguser@example.com',
+                    url_for('static', filename='dbg-user.png'),
+                    debug=True)
+
+
+def generate_share_code(user_id):
+    letters = string.ascii_letters + string.digits
+    code_length = 8
+    while True:
+        code = ''.join(random.choice(letters)
+                       for i in range(code_length))
+        added = redis.sadd('share:codes', code)
+        if added == 1:
+            break
+    redis.set(f'user:share:{code}', user_id)
+    return code
 
 
 @login_manager.user_loader
@@ -124,6 +158,21 @@ def list_words():
     params = {
         'words': words,
         'nwords': len(words),
+    }
+    return render_template('list.html', **params)
+
+
+@app.route('/list/<share_code>')
+def list_shared_words(share_code):
+    user_id = redis.get(f'user:share:{share_code}')
+    user = User.get(user_id)
+    words_key = f'words:{user_id}'
+    words = redis.smembers(words_key)
+    params = {
+        'words': words,
+        'nwords': len(words),
+        'readonly': True,
+        'user_name': user.name,
     }
     return render_template('list.html', **params)
 
@@ -211,6 +260,21 @@ def login_callback():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/share')
+@login_required
+def share():
+    return render_template('share.html')
+
+
+@app.route('/share/create')
+@login_required
+def share_create():
+    if not current_user.share_code:
+        current_user.share_code = generate_share_code(current_user.id)
+        current_user.save()
+    return redirect('/share', code=303)
 
 
 @app.route('/add', methods=['POST'])

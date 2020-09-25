@@ -17,7 +17,10 @@ After the `.env` file is ready, simply run:
 
     docker-compose up
 
-The app should be available at `https://localhost:8000` (using an
-ad-hoc SSL context).
+To enable debug user, you can run:
+
+    docker-compose -f docker-compose.yml -f docker-compose.debug.yml up
+
+The app should be available at `http://localhost:8000`.
 
 [1]: https://languagemachines.github.io/frog/

@@ -12,4 +12,4 @@ services:
     image: "redis:7.0.11"
     command: "redis-server --appendonly yes"
     volumes:
-      - ./redis-data:/data
+      - ${DATA_DIR:-./redis-data}:/data

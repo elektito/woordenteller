@@ -1,0 +1,58 @@
+FROM ubuntu:22.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    file \
+    pkg-config \
+    build-essential \
+    libexttextcat-dev \
+    libxml2-dev \
+    libz-dev \
+    libbz2-dev \
+    libtar-dev
+
+WORKDIR /opt/frog
+
+RUN curl -sL https://github.com/LanguageMachines/ticcutils/releases/download/v0.32/ticcutils-0.32.tar.gz -o ticcutils.tar.gz
+RUN tar -xf ticcutils.tar.gz
+RUN cd ticcutils-0.32 && ./configure && make -j $(nproc) && make install
+RUN rm -r ticcutils.tar.gz ticcutils-0.32
+
+RUN curl -sL https://github.com/LanguageMachines/timbl/releases/download/v6.8.2/timbl-6.8.2.tar.gz -o timbl.tar.gz
+RUN tar -xf timbl.tar.gz
+RUN cd timbl-6.8.2 && ./configure && make -j $(nproc) && make install
+RUN rm -r timbl.tar.gz timbl-6.8.2
+
+RUN curl -sL https://github.com/LanguageMachines/mbt/releases/download/v3.9/mbt-3.9.tar.gz -o mbt.tar.gz
+RUN tar -xf mbt.tar.gz
+RUN cd mbt-3.9 && ./configure && make -j $(nproc) && make install
+RUN rm -r mbt.tar.gz mbt-3.9
+
+RUN curl -sL https://github.com/LanguageMachines/libfolia/releases/download/v2.14/libfolia-2.14.tar.gz -o libfolia.tar.gz
+RUN tar -xf libfolia.tar.gz
+RUN cd libfolia-2.14 && ./configure && make -j $(nproc) && make install
+RUN rm -r libfolia.tar.gz libfolia-2.14
+
+RUN curl -sL https://github.com/LanguageMachines/uctodata/releases/download/v0.9.1/uctodata-0.9.1.tar.gz -o uctodata.tar.gz
+RUN tar -xf uctodata.tar.gz
+RUN cd uctodata-0.9.1 && ./configure && make -j $(nproc) && make install
+RUN rm -r uctodata.tar.gz uctodata-0.9.1
+
+RUN curl -sL https://github.com/LanguageMachines/ucto/releases/download/v0.29/ucto-0.29.tar.gz -o ucto.tar.gz
+RUN tar -xf ucto.tar.gz
+RUN cd ucto-0.29 && ./configure && make -j $(nproc) && make install
+RUN rm -r ucto.tar.gz ucto-0.29
+
+RUN curl -sL https://github.com/LanguageMachines/frogdata/releases/download/v0.21/frogdata-0.21.tar.gz -o frogdata.tar.gz
+RUN tar -xf frogdata.tar.gz
+RUN cd frogdata-0.21 && ./configure && make -j $(nproc) && make install
+RUN rm -r frogdata.tar.gz frogdata-0.21
+
+RUN curl -sL https://github.com/LanguageMachines/frog/releases/download/v0.28/frog-0.28.tar.gz -o frog.tar.gz
+RUN tar -xf frog.tar.gz
+RUN cd frog-0.28 && ./configure && make -j $(nproc) && make install
+RUN rm -r frog.tar.gz frog-0.28
+
+RUN ldconfig

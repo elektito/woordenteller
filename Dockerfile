@@ -1,4 +1,4 @@
-FROM elektito/frog:0.21
+FROM elektito/frog:0.28
 
 RUN apt-get update && apt-get install -y python3-pip git
 
